@@ -29,6 +29,8 @@ public class Board extends Application {
 
     private int spacer;
 
+    private Pane boardDrawing = new Pane();
+
     public static void main(String args [] ) {
         // this class can be run to provide an example
         // of an example Board with a randomly placed block
@@ -48,7 +50,10 @@ public class Board extends Application {
         Board board = new Board(4,400);
 
         this.drawBackground(root);
-        //this.drawBlocks(root);
+
+        randomBlock().value(1);
+
+        root.getChildren().add(this.drawBlocks());
 
         ///////
         primaryStage.setScene(scene);
@@ -62,8 +67,8 @@ public class Board extends Application {
 
         this.board = new Block[this.squarePlaces][this.squarePlaces];
         int j = 0;
-        for (int i = 0; i < this.board.length; i++) {
-            for (j = 0; j < this.board[0].length; j++) {
+        for (int i = 0; i < squarePlaces; i++) {
+            for (j = 0; j < this.squarePlaces; j++) {
                 this.board[i][j] = new Block(0);
             }
             j = 0;
@@ -76,8 +81,8 @@ public class Board extends Application {
 
         this.board = new Block[this.squarePlaces][this.squarePlaces];
         int j = 0; //
-        for (int i = 0; i < this.board.length; i++) {
-            for (j = 0; j < this.board[0].length; j++) {
+        for (int i = 0; i < this.squarePlaces; i++) {
+            for (j = 0; j < this.squarePlaces; j++) {
                 this.board[i][j] = new Block(0);
             }
             j = 0;
@@ -99,20 +104,13 @@ public class Board extends Application {
 
     public int squarePixels(){return this.squarePixels;}
 
-    public boolean checkIfFull() {
-        for (int i = 0; i < Math.pow(this.squarePlaces,2); i++){
-            if (block(i).value() == 0){
-                return false;
-            }
-        }
-        return true;
-    }
+
 
     public void drawBackground(Group root){
         int x;      int y;
         int width;  int height;
 
-        for (int i = 0; i < this.squarePlaces*this.squarePlaces; i++) {
+        for (int i = 0; i < Math.pow(this.squarePlaces,2); i++) {
 
             // provide an identifying x and y coordinate for our board grid
             x = i / this.squarePlaces;
@@ -136,6 +134,50 @@ public class Board extends Application {
 
             root.getChildren().add(rectangle);
         }
+    }
+
+    public Block randomBlock() {
+        int x = (int) (Math.random()*(double)squarePlaces);
+        int y = (int) (Math.random()*(double)squarePlaces);
+        return this.board[x][y];
+    }
+
+    public Pane drawBlocks() {
+        int minValue = 1;
+
+        int x; int y; int width; int height;
+
+        Pane blockDrawing = new Pane();
+
+        int j = 0;
+        for (int i = 0; i < this.squarePlaces; i++) {
+            for (j = 0; j < this.squarePlaces; j++) {
+                if (this.board[i][j].value() >= minValue ){
+
+                    x = i * this.squarePixels/this.squarePlaces + this.spacer;
+                    y = j * this.squarePixels/this.squarePlaces + this.spacer;
+                    width = this.squarePixels/this.squarePlaces - this.spacer * 2;
+                    height = this.squarePixels/this.squarePlaces - this.spacer * 2;
+
+                    blockDrawing = this.board[i][j].drawing(x,y,width,height);
+
+                    boardDrawing.getChildren().add(blockDrawing);
+                }
+
+            }
+            j = 0;
+        }
+        return boardDrawing;
+    }
+
+
+    public boolean checkIfFull() {
+        for (int i = 0; i < Math.pow(this.squarePlaces,2); i++){
+            if (block(i).value() == 0){
+                return false;
+            }
+        }
+        return true;
     }
 
     public void generateNewBlock(){
