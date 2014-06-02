@@ -55,7 +55,6 @@ public class Board extends Application {
         primaryStage.show();
     }
 
-
     public Board() {
         // default values of Board presumes a 4x4 board of 400 pixels wide
         this.squarePlaces = 4;
