@@ -32,30 +32,32 @@ public class Board extends Application {
     private Pane boardDrawing = new Pane();
 
     public static void main(String args [] ) {
-        // this class can be run to provide an example
-        // of an example Board with a randomly placed block
+        // This class may be run to provide an example
+        // of a Board with a randomly placed block
         // with a value of 2
         launch(args);
     }
 
     public void start(Stage primaryStage) throws Exception {
 
-        primaryStage.setTitle(getClass().getSimpleName());
+        primaryStage.setTitle("Example of " + getClass().getSimpleName());
 
         Group root = new Group();
 
         Scene scene = new Scene(root,400,400, Color.LIGHTPINK);
+
         //////
+        // This is the code that draws the Board class example
 
-        Board board = new Board(4,400);
+        Board board = new Board(4,400); // creates a new Board
 
-        this.drawBackground(root);
+        board.drawBackground(root);      //
 
-        randomBlock().value(1);
+        board.randomBlock().value(1);
 
-        root.getChildren().add(this.drawBlocks());
+        root.getChildren().add(board.drawBlocks());
 
-        ///////
+        //////
         primaryStage.setScene(scene);
         primaryStage.show();
     }

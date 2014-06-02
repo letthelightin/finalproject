@@ -12,9 +12,6 @@ public class Block extends Application {
 
     private int value;      // value of the block
 
-    private int width;      // width of the block pixels
-    private int height;     // height of the block pixels
-
     private double strokeWidth;     // strength of the stroke
     // around the rectangle
 
@@ -25,26 +22,33 @@ public class Block extends Application {
     private Pane image;            // group of javafx components
 
     public static void main(String args[]) {
-        // this class can be run to provide an example
-        // of a single block being drawn
+        // This class may be run to provide an example
+        // of a single block being drawn.
         launch(args);
     }
 
     public void start(Stage primaryStage) throws Exception {
 
-        primaryStage.setTitle("example " + getClass().getSimpleName());
+        primaryStage.setTitle("Example of " + getClass().getSimpleName());
 
         Group root = new Group();
 
         Scene scene = new Scene(root,400,400,Color.WHITE);
+
+        //////
+        // This is the code that draws the Block class example
+        // by adding a drawing of Block with (x, y, width, height)
+        // to the Group root submitted to Scene scene and displayed
+        // by the special instance primaryStage.
+
+        // Block.drawing() returns a Pane.
+
+        Block block = new Block();
+
+        root.getChildren().add(block.drawing(50,50,300,300));
+
         /////
 
-
-        root.getChildren().add(this.drawing(50,50,300,300));
-
-
-
-        /////
         primaryStage.setScene(scene);
         primaryStage.show();
 
@@ -52,8 +56,6 @@ public class Block extends Application {
 
     public Block() {
         this.value = 0;
-        this.width = 80;
-        this.height = 80;
         this.strokeWidth = 3;
         this.block = Color.WHITE;
         this.stroke = Color.BLACK;
@@ -70,8 +72,6 @@ public class Block extends Application {
 
     // SET Constructors for private variables of this Block
     public void value(int value) { this.value = value; }
-    public void width(int width) { this.width = width; }
-    public void height(int height) { this.height = height; }
     public void strokeWidth(double strokeWidth) { this.strokeWidth = strokeWidth; }
     public void block(Color color) { this.block = color; }
     public void stroke(Color color) { this.stroke = color; }
@@ -79,8 +79,6 @@ public class Block extends Application {
 
     // GET Constructors for private variables of this Block
     public int value() { return this.value; }
-    public int width() { return this.width; }
-    public int height() { return this.height; }
     public double strokeWidth() { return this.strokeWidth; }
     public Color block() { return this.block; }
     public Color stroke() { return this.stroke; }
