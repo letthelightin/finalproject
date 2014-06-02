@@ -81,10 +81,9 @@
       <file leaf-file-name="RunMe.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/RunMe.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.77883095" vertical-offset="0" max-vertical-offset="918">
-              <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.05345912" vertical-offset="0" max-vertical-offset="918">
+              <caret line="2" column="26" selection-start-line="2" selection-start-column="26" selection-end-line="2" selection-end-column="26" />
               <folding>
-                <element signature="imports" expanded="true" />
                 <element signature="e#241#242#0" expanded="true" />
                 <element signature="e#269#270#0" expanded="true" />
               </folding>
@@ -151,10 +150,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="968" />
-    <option name="y" value="45" />
+    <option name="x" value="1008" />
+    <option name="y" value="63" />
     <option name="width" value="860" />
-    <option name="height" value="921" />
+    <option name="height" value="924" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -505,11 +504,19 @@
       <created>1401685345883</created>
       <updated>1401685345883</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Came to a clean black and white look and feel along with setting the spacer variable.&#10;Much nicer looking.&#10;">
+      <created>1401685433439</created>
+      <updated>1401685433439</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Forgot to add RunMe.java">
+      <created>1401685649742</created>
+      <updated>1401685649742</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="968" y="45" width="860" height="921" extended-state="0" />
+    <frame x="1008" y="63" width="860" height="924" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -530,7 +537,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18483412" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18696187" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18627451" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -558,7 +565,8 @@
     <MESSAGE value="update 5 - Board class draws board background, inserts a random block, and draws the board of one block. Readme is somewhat formatted and gives a fairly solid introduction." />
     <MESSAGE value="Removed some unused variables from Block class (width, height). &#10;Corrected some explanatory comments. &#10;Corrected some improper THIS.method() calls under the static start of Block and Board." />
     <MESSAGE value="Came to a clean black and white look and feel along with setting the spacer variable.&#10;Much nicer looking.&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Came to a clean black and white look and feel along with setting the spacer variable.&#10;Much nicer looking.&#10;" />
+    <MESSAGE value="Forgot to add RunMe.java" />
+    <option name="LAST_COMMIT_MESSAGE" value="Forgot to add RunMe.java" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -742,10 +750,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/RunMe.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.77883095" vertical-offset="0" max-vertical-offset="918">
-          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.05345912" vertical-offset="0" max-vertical-offset="918">
+          <caret line="2" column="26" selection-start-line="2" selection-start-column="26" selection-end-line="2" selection-end-column="26" />
           <folding>
-            <element signature="imports" expanded="true" />
             <element signature="e#241#242#0" expanded="true" />
             <element signature="e#269#270#0" expanded="true" />
           </folding>
