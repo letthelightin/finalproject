@@ -29,7 +29,9 @@ public class Board extends Application {
 
     private int spacer;
 
-    private Pane boardDrawing = new Pane();
+    private Group root;
+
+    private Pane image = new Pane();
 
     public static void main(String args [] ) {
         // This class may be run to provide an example
@@ -39,23 +41,19 @@ public class Board extends Application {
     }
 
     public void start(Stage primaryStage) throws Exception {
-
         primaryStage.setTitle("Example of " + getClass().getSimpleName());
-
         Group root = new Group();
-
-        Scene scene = new Scene(root,400,400, Color.LIGHTPINK);
-
+        Scene scene = new Scene(root,400,400, Color.WHITE);
         //////
         // This is the code that draws the Board class example
 
-        Board board = new Board(4,400); // creates a new Board
+        Board board = new Board(root,4,400); // creates a new Board
 
-        board.drawBackground(root);      //
+        board.drawBackground();
 
-        board.randomBlock().value(1);
+        board.randomBlock().value(2);
 
-        root.getChildren().add(board.drawBlocks());
+        board.drawBlocks();
 
         //////
         primaryStage.setScene(scene);
@@ -77,11 +75,15 @@ public class Board extends Application {
         }
     }
 
-    public Board(int squarePlaces, int squarePixels){
+    public Board(Group root, int squarePlaces, int squarePixels){
+        this.root = root;
+
         this.squarePlaces = squarePlaces;
         this.squarePixels = squarePixels;
 
         this.board = new Block[this.squarePlaces][this.squarePlaces];
+
+        // This fills the places of the board with 0-value blocks.
         int j = 0; //
         for (int i = 0; i < this.squarePlaces; i++) {
             for (j = 0; j < this.squarePlaces; j++) {
@@ -91,11 +93,12 @@ public class Board extends Application {
         }
     }
 
-    public Object block(int x, int y) { //actual block address
+    public Block block(int x, int y) { //actual block address
         return this.board[x][y];
     }
 
-    public Block block(int b) { //unique integer for each block address
+    public Block block(int b) {
+        // This constructor provides a single integer address for each block.
         int x = b / this.squarePlaces();
         int y = b % this.squarePlaces();
 
@@ -106,11 +109,13 @@ public class Board extends Application {
 
     public int squarePixels(){return this.squarePixels;}
 
+    public Pane background(){
+        Pane background = new Pane();
 
-
-    public void drawBackground(Group root){
         int x;      int y;
         int width;  int height;
+
+        spacer = 10;
 
         for (int i = 0; i < Math.pow(this.squarePlaces,2); i++) {
 
@@ -128,15 +133,21 @@ public class Board extends Application {
 
             Rectangle rectangle = new Rectangle(x,y,width,height);
             rectangle.setSmooth(true);
-            rectangle.setArcHeight(50);
-            rectangle.setArcWidth(50);
+            rectangle.setArcHeight(25);
+            rectangle.setArcWidth(25);
             rectangle.setStroke(Color.BLACK);
             rectangle.setFill(Color.WHITE);
             rectangle.setStrokeWidth(2);
 
-            root.getChildren().add(rectangle);
+            background.getChildren().add(rectangle);
         }
+        return background;
     }
+
+    public void drawBackground() {
+        this.root.getChildren().add(this.background());
+    }
+
 
     public Block randomBlock() {
         int x = (int) (Math.random()*(double)squarePlaces);
@@ -144,10 +155,12 @@ public class Board extends Application {
         return this.board[x][y];
     }
 
-    public Pane drawBlocks() {
+    public Pane blocks() {
         int minValue = 1;
 
         int x; int y; int width; int height;
+
+        spacer = 15;
 
         Pane blockDrawing = new Pane();
 
@@ -163,17 +176,46 @@ public class Board extends Application {
 
                     blockDrawing = this.board[i][j].drawing(x,y,width,height);
 
-                    boardDrawing.getChildren().add(blockDrawing);
+                    image.getChildren().add(blockDrawing);
                 }
 
             }
             j = 0;
         }
-        return boardDrawing;
+        return image;
+    }
+
+    public void drawBlocks(){
+        this.root.getChildren().add(this.blocks());
     }
 
 
-    public boolean checkIfFull() {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public boolean isFull() {
         for (int i = 0; i < Math.pow(this.squarePlaces,2); i++){
             if (block(i).value() == 0){
                 return false;

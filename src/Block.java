@@ -13,7 +13,6 @@ public class Block extends Application {
     private int value;      // value of the block
 
     private double strokeWidth;     // strength of the stroke
-    // around the rectangle
 
     private Color block;            // color of the block
     private Color stroke;           // color of the border
@@ -41,13 +40,11 @@ public class Block extends Application {
         // to the Group root submitted to Scene scene and displayed
         // by the special instance primaryStage.
 
-        // Block.drawing() returns a Pane.
-
         Block block = new Block();
 
-        root.getChildren().add(block.drawing(50,50,300,300));
+        block.draw(root,50,50,300,300);
 
-        /////
+        //////
 
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -56,7 +53,7 @@ public class Block extends Application {
 
     public Block() {
         this.value = 0;
-        this.strokeWidth = 3;
+        this.strokeWidth = 0;
         this.block = Color.WHITE;
         this.stroke = Color.BLACK;
         this.label = Color.BLACK;
@@ -65,9 +62,9 @@ public class Block extends Application {
     public Block(int value) {
         this.value = 0;
         this.strokeWidth = 3;
-        this.block = Color.WHITE;
+        this.block = Color.BLACK;
         this.stroke = Color.BLACK;
-        this.label = Color.BLACK;
+        this.label = Color.WHITE;
     }
 
     // SET Constructors for private variables of this Block
@@ -93,8 +90,8 @@ public class Block extends Application {
         rectangle.setSmooth(true);
         rectangle.setArcHeight(30*width/100);
         rectangle.setArcWidth(30*width/100);
-        rectangle.setStroke(Color.BLACK);
-        rectangle.setFill(Color.WHITE);
+        rectangle.setStroke(this.stroke);
+        rectangle.setFill(this.block);
         rectangle.setStrokeWidth(3*width/100);
         rectangle.setManaged(true);
 
@@ -112,6 +109,10 @@ public class Block extends Application {
         this.image.setManaged(true);
 
         return this.image;
+    }
+
+    public void draw(Group root,int x, int y, int width, int height)    {
+        root.getChildren().add(this.drawing(x,y,width,height));
     }
 
 }
