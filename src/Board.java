@@ -225,7 +225,7 @@ public class Board extends Application {
         path.getElements().add(moveTo);
         path.getElements().add(lineTo);
 
-        PathTransition pathTransition = new PathTransition(Duration.millis(2500), path, image);
+        PathTransition pathTransition = new PathTransition(Duration.millis(700), path, image);
 
         return  pathTransition;
     }
@@ -243,6 +243,72 @@ public class Board extends Application {
     public void scene(Scene scene){ this.scene = scene; }
 
     public void root(Group root){ this.root = root; }
+
+
+
+    public Stage primaryStage() { return this.primaryStage; }
+
+    public int placesBelow (int i, int j){
+        int count = this.squarePlaces-1-j;
+
+        for (int y = j + 1; y < this.squarePlaces(); y++){
+            if (this.block(i,y).value() > 0) { count--; }
+        }
+
+        return count;
+    }
+
+
+    public int placesAbove (int i, int j){
+        int count = j;
+
+        for (int y = count-1; y >= 0; y--){
+
+            if (this.block(i,y).value() > 0) { count--; }
+
+        }
+
+        return count;
+    }
+
+    public int placesRight (int i, int j){
+        int count = 0;
+
+            for (int x = i + 1; i < squarePlaces; x++) {
+                if (this.block(x, j).value() > 0) {
+                    count++;
+                }
+            }
+
+
+        return count;
+    }
+
+    public int placesLeft (int i, int j){
+        int count = i;
+
+        for (int x = i - 1; x >= 0; x--) {
+            if (this.block(x,j).value() > 0) { count--; }
+        }
+
+        return count;
+    }
+
+    public void swapPlaces(int aX, int aY, int bX, int bY) {
+
+        Block space = new Block();
+
+        space = this.board[aX][aY];
+        this.board[aX][aY] = this.board[bX][bY];
+        this.board[bX][bY] = space;
+
+    }
+
+
+
+
+
+
 
     //////////
     public boolean isFull() {
@@ -275,9 +341,6 @@ public class Board extends Application {
             }
         }while ((flag==false) && (counterLimit < 1000));
     }
-
-    public Stage primaryStage() { return this.primaryStage; }
-
 
 }
 

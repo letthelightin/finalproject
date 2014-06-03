@@ -32,9 +32,10 @@ public class RunMe extends Application {
         //board.randomPlace().value(2);
 
         board.block(0,0).value(2);
-        board.block(1,1).value(2);
+        board.block(0,1).value(2);
         board.block(2,2).value(2);
         board.block(3,3).value(2);
+        board.block(3,2).value(2);
 
         board.drawBlocks();
 
@@ -63,27 +64,106 @@ public class RunMe extends Application {
         }
 
         public void handle(final KeyEvent keyEvent) {
-            if (keyEvent.getCode() == KeyCode.RIGHT) {
-
-            } else if (keyEvent.getCode() == KeyCode.LEFT) {
-
-            } else if (keyEvent.getCode() == KeyCode.UP) {
-
-            } else if (keyEvent.getCode() == KeyCode.DOWN) {
+            if (keyEvent.getCode() == KeyCode.DOWN) {
                 down();
+            } else if (keyEvent.getCode() == KeyCode.UP) {
+                up();
+            } else if (keyEvent.getCode() == KeyCode.RIGHT) {
+                right();
+            } else if (keyEvent.getCode() == KeyCode.LEFT) {
+                //left();
             }
         }
 
+
         public void down() {
+            int placesBelow; int blocksBelow;
+            int j; //
 
-            board.move(0,0,0,3).play();
-            board.move(1,1,1,3).play();
-            board.move(2,2,2,3).play();
-            board.move(3,3,3,0).play();
+            for (int i = squarePlaces-1; i >= 0; i--) {
+                for (j = squarePlaces-1; j >= 0; j--) {
 
+                    int value = board.block(i,j).value();
+
+                    if (value > 0) {
+                        placesBelow = board.placesBelow(i, j);
+                        if (placesBelow > 0) {
+                            board.move(i, j, i, j + placesBelow).play();
+                            board.swapPlaces(i, j, i,  j + placesBelow);
+                        }
+                    }
+                }
+                j = squarePlaces-1;
+            }
         }
 
+        public void up() {
+            int placesAbove;
+            int j;
+
+            for (int i = 0; i < this.squarePlaces; i++) {
+                for (j = 0; j < this.squarePlaces; j++) {
+                    int value = board.block(i,j).value();
+                    if (value > 0) {
+                        placesAbove = board.placesAbove(i, j);
+
+                        if (placesAbove > 0) {
+                            board.move(i, j, i, j - placesAbove).play();
+
+                            board.swapPlaces(i, j, i,  j - placesAbove);
+                        }
+                    }
+                }
+                j = 0;
+            }
+        }
+
+        public void right() {
+            int placesRight;
+            int i;
+
+            // pull items from the right to the right first
+            for (int j=squarePlaces-1; j >= 0; j--){
+                for ( i=squarePlaces-1; i >= 0; i--){
+
+
+                    int value = board.block(i,j).value();
+                    if (value > 0) {
+                        placesRight = board.placesRight(i, j);
+
+                        if (placesRight > 0) {
+                            board.move(i, j, i+ placesRight, j).play();
+
+                            board.swapPlaces(i, j, i+ placesRight,  j);
+                        }
+                    }
+
+
+
+
+                }
+                i=squarePlaces-1;
+            }
+        }
+
+        public void placesLeft() {
+
+            int placesRight;
+            int i;
+
+            for (int j = 0; j < this.squarePlaces; j++) {
+                for (i = 0; i < this.squarePlaces; i++) {
+
+
+
+                }
+                i = 0;
+            }
+
+
+        }
     }
+
 }
     
 
