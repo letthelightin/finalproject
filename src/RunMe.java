@@ -71,7 +71,7 @@ public class RunMe extends Application {
             } else if (keyEvent.getCode() == KeyCode.RIGHT) {
                 right();
             } else if (keyEvent.getCode() == KeyCode.LEFT) {
-                //left();
+                left();
             }
         }
 
@@ -143,15 +143,24 @@ public class RunMe extends Application {
             }
         }
 
-        public void placesLeft() {
+        public void left() {
 
-            int placesRight;
+            int placesLeft;
             int i;
 
             for (int j = 0; j < this.squarePlaces; j++) {
                 for (i = 0; i < this.squarePlaces; i++) {
 
+                    int value = board.block(i,j).value();
+                    if (value > 0) {
+                        placesLeft = board.placesLeft(i, j);
 
+                        if (placesLeft > 0) {
+                            board.move(i, j, i - placesLeft, j).play();
+
+                            board.swapPlaces(i, j, i - placesLeft,  j);
+                        }
+                    }
 
                 }
                 i = 0;

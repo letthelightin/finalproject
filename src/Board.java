@@ -285,11 +285,14 @@ public class Board extends Application {
     }
 
     public int placesLeft (int i, int j){
-        int count = i;
+        int count = 0;
 
-        for (int x = i - 1; x >= 0; x--) {
-            if (this.block(x,j).value() > 0) { count--; }
+        for (int x = i - 1; x >= 0 ; x--) {
+            if (this.block(x, j).value() <= 0) {
+                count++;
+            }
         }
+
 
         return count;
     }
