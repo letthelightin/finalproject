@@ -30,15 +30,17 @@ public class RunMe extends Application {
         board.drawBackground();
 
         //board.randomPlace().value(2);
-        board.block(3, 2).value(2);
 
+        board.block(0,0).value(2);
+        board.block(1,1).value(2);
+        board.block(2,2).value(2);
+        board.block(3,3).value(2);
 
         board.drawBlocks();
 
         EventHandler<KeyEvent> kEvent = new MyKeyEventHandler(board);
 
         board.scene().setOnKeyPressed(kEvent);
-
 
         //////
         primaryStage.setScene(board.scene());
@@ -74,6 +76,10 @@ public class RunMe extends Application {
 
         public void down() {
 
+            board.move(0,0,0,3).play();
+            board.move(1,1,1,3).play();
+            board.move(2,2,2,3).play();
+            board.move(3,3,3,0).play();
 
         }
 

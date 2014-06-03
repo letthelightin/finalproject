@@ -35,7 +35,7 @@ public class Block extends Application {
 
         Group root = new Group();
 
-        Scene scene = new Scene(root,400,400,Color.WHITE);
+        Scene scene = new Scene(root, 400, 400, Color.WHITE);
 
         //////
         // This is the code that draws the Block class example
@@ -45,13 +45,12 @@ public class Block extends Application {
 
         Block block = new Block();
 
-        block.draw(root,50,50,300,300);
+        block.draw(root, 50, 50, 300, 300);
 
         //////
 
         primaryStage.setScene(scene);
         primaryStage.show();
-
     }
 
     public Block() {
@@ -71,19 +70,50 @@ public class Block extends Application {
     }
 
     // SET Constructors for private variables of this Block
-    public void value(int value) { this.value = value; }
-    public void strokeWidth(double strokeWidth) { this.strokeWidth = strokeWidth; }
-    public void block(Color color) { this.block = color; }
-    public void stroke(Color color) { this.stroke = color; }
-    public void label(Color color) { this.label = color; }
+    public void value(int value) {
+        this.value = value;
+    }
+
+    public void strokeWidth(double strokeWidth) {
+        this.strokeWidth = strokeWidth;
+    }
+
+    public void block(Color color) {
+        this.block = color;
+    }
+
+    public void stroke(Color color) {
+        this.stroke = color;
+    }
+
+    public void label(Color color) {
+        this.label = color;
+    }
 
     // GET Constructors for private variables of this Block
-    public int value() { return this.value; }
-    public double strokeWidth() { return this.strokeWidth; }
-    public Color block() { return this.block; }
-    public Color stroke() { return this.stroke; }
-    public Color label() { return this.label; }
-    public Group image() { return this.image; }
+    public int value() {
+        return this.value;
+    }
+
+    public double strokeWidth() {
+        return this.strokeWidth;
+    }
+
+    public Color block() {
+        return this.block;
+    }
+
+    public Color stroke() {
+        return this.stroke;
+    }
+
+    public Color label() {
+        return this.label;
+    }
+
+    public Group image() {
+        return this.image;
+    }
 
     public Group drawing(int width, int height) {
 
@@ -91,18 +121,18 @@ public class Block extends Application {
 
         this.rectangle = new Rectangle(width, height);
         this.rectangle.setSmooth(true);
-        this.rectangle.setArcHeight(30*width/100);
-        this.rectangle.setArcWidth(30*width/100);
+        this.rectangle.setArcHeight(30 * width / 100);
+        this.rectangle.setArcWidth(30 * width / 100);
         this.rectangle.setStroke(this.stroke);
         this.rectangle.setFill(this.block);
-        this.rectangle.setStrokeWidth(3*width/100);
+        this.rectangle.setStrokeWidth(3 * width / 100);
 
         this.image.getChildren().add(rectangle);
 
         Label label = new Label("" + this.value);
-        label.setLayoutX(40*width/100);
-        label.setLayoutY(30*height/100);
-        label.setFont(Font.font("Calibri", 50*width/100));
+        label.setLayoutX(40 * width / 100);
+        label.setLayoutY(30 * height / 100);
+        label.setFont(Font.font("Calibri", 50 * width / 100));
         label.setTextFill(this.label);
 
         this.image.getChildren().add(label);
@@ -110,15 +140,11 @@ public class Block extends Application {
         return this.image;
     }
 
-    public void draw(Group root,double x, double y, int width, int height)    {
-        root.getChildren().add(this.drawing(width,height));
+    public void draw(Group root, double x, double y, int width, int height) {
+        root.getChildren().add(this.drawing(width, height));
         this.image.setLayoutX(x);
         this.image.setLayoutY(y);
     }
 
+    public void image(Group image){this.image = image; }
 }
-
-
-
-
-

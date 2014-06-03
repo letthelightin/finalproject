@@ -57,11 +57,12 @@ public class Board extends Application {
         board.drawBackground();
 
         //board.randomPlace().value(2);
-        board.block(3,2).value(2);
-
+        //board.block(3,2).value(2);
+        board.block(0,0).value(2);
         board.drawBlocks();
 
-        board.move(3,2,3,3);
+        //board.move(3,2,3,3);
+        board.move(0,0,0,3).play();
 
         //////
         primaryStage.setScene(board.scene());
@@ -159,7 +160,7 @@ public class Board extends Application {
 
         int x; int y; int width; int height;
 
-        spacer = 15;
+        this.spacer = 15;
 
         Group blockDrawing = new Group();
 
@@ -167,16 +168,24 @@ public class Board extends Application {
         for (int i = 0; i < this.squarePlaces; i++) {
             for (j = 0; j < this.squarePlaces; j++) {
 
-                x = i * this.squarePixels/this.squarePlaces + this.spacer;
-                y = j * this.squarePixels/this.squarePlaces + this.spacer;
+                //provide the width and height of a place rectangle
                 width = this.squarePixels/this.squarePlaces - this.spacer * 2;
                 height = this.squarePixels/this.squarePlaces - this.spacer * 2;
 
+                // provide an x and y coordinate for our pixel grid
+                x = i * this.squarePixels/this.squarePlaces + this.spacer;
+                y = j * this.squarePixels/this.squarePlaces + this.spacer;
+
                 blockDrawing = this.board[i][j].drawing(width,height);
+
+                blockDrawing.setTranslateX(x);
+                blockDrawing.setTranslateY(y);
 
                 if (this.board[i][j].value() <= minValue) {
                     blockDrawing.setVisible(false);
                 }
+
+                block(i,j).image(blockDrawing);
 
                 image.getChildren().add(blockDrawing);
 
@@ -192,13 +201,15 @@ public class Board extends Application {
 
     public Group root() { return this.root; }
 
-    public void move(int aX, int aY, int bX, int bY) {
+    public PathTransition move(int aX, int aY, int bX, int bY) {
 
-        aX = (int) this.placePixelCenter(aX);
-        aY = (int) this.placePixelCenter(aY);
+        Group image = this.block(aX,aY).image();
 
-        bX = (int) this.placePixelCenter(bX);
-        bY = (int) this.placePixelCenter(bY);
+        aX = (int) this.placeOriginX(aX);
+        aY = (int) this.placeOriginY(aY);
+
+        bX = (int) this.placeOriginX(bX);
+        bY = (int) this.placeOriginY(bY);
 
         Path path = new Path();
         this.root.getChildren().add(path); // comment this line to hide path from stage
@@ -214,21 +225,24 @@ public class Board extends Application {
         path.getElements().add(moveTo);
         path.getElements().add(lineTo);
 
-        PathTransition pathTransition = new PathTransition(Duration.millis(250), path, image);
-        pathTransition.setCycleCount(1);
-        pathTransition.setAutoReverse(false);
-        pathTransition.play();
+        PathTransition pathTransition = new PathTransition(Duration.millis(2500), path, image);
 
+        return  pathTransition;
     }
 
-    public double placePixelCenter (int a) {
+    public double placeOriginX (int a) {
         double squarePlacePixel = this.squarePixels/this.squarePlaces;
         return a * squarePlacePixel + (0.5 * squarePlacePixel) ;
     }
 
+    public double placeOriginY (int a) {
+        double squarePlacePixel = this.squarePixels/this.squarePlaces;
+        return a * squarePlacePixel + (0.5 * squarePlacePixel) ;
+    }
 
+    public void scene(Scene scene){ this.scene = scene; }
 
-
+    public void root(Group root){ this.root = root; }
 
     //////////
     public boolean isFull() {
@@ -261,6 +275,9 @@ public class Board extends Application {
             }
         }while ((flag==false) && (counterLimit < 1000));
     }
+
+    public Stage primaryStage() { return this.primaryStage; }
+
 
 }
 
