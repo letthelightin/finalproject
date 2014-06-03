@@ -1,6 +1,6 @@
 #Final Project: J2048
 ####https://github.com/letthelightin/finalproject/
-####Daniel Retta
+####Daniel Retta of Monterey Peninsula College Fall 2014
 
 
 ##Project Outline:

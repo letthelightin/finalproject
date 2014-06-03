@@ -1,5 +1,6 @@
 import javafx.application.Application;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
@@ -14,11 +15,13 @@ public class Block extends Application {
 
     private double strokeWidth;     // strength of the stroke
 
+    private Rectangle rectangle;
+
     private Color block;            // color of the block
     private Color stroke;           // color of the border
     private Color label;            // color of the label
 
-    private Pane image;            // group of javafx components
+    private Group image;            // group of javafx components
 
     public static void main(String args[]) {
         // This class may be run to provide an example
@@ -80,39 +83,37 @@ public class Block extends Application {
     public Color block() { return this.block; }
     public Color stroke() { return this.stroke; }
     public Color label() { return this.label; }
-    public Pane image() { return this.image; }
+    public Group image() { return this.image; }
 
-    public Pane drawing(int x, int y, int width, int height) {
+    public Group drawing(int width, int height) {
 
-        this.image = new Pane();
+        this.image = new Group();
 
-        Rectangle rectangle = new Rectangle(x, y, width, height);
-        rectangle.setSmooth(true);
-        rectangle.setArcHeight(30*width/100);
-        rectangle.setArcWidth(30*width/100);
-        rectangle.setStroke(this.stroke);
-        rectangle.setFill(this.block);
-        rectangle.setStrokeWidth(3*width/100);
-        rectangle.setManaged(true);
+        this.rectangle = new Rectangle(width, height);
+        this.rectangle.setSmooth(true);
+        this.rectangle.setArcHeight(30*width/100);
+        this.rectangle.setArcWidth(30*width/100);
+        this.rectangle.setStroke(this.stroke);
+        this.rectangle.setFill(this.block);
+        this.rectangle.setStrokeWidth(3*width/100);
 
         this.image.getChildren().add(rectangle);
 
         Label label = new Label("" + this.value);
-        label.setLayoutX(x + 40*width/100);
-        label.setLayoutY(y + 30*height/100);
+        label.setLayoutX(40*width/100);
+        label.setLayoutY(30*height/100);
         label.setFont(Font.font("Calibri", 50*width/100));
         label.setTextFill(this.label);
-        label.setManaged(true);
 
         this.image.getChildren().add(label);
-
-        this.image.setManaged(true);
 
         return this.image;
     }
 
-    public void draw(Group root,int x, int y, int width, int height)    {
-        root.getChildren().add(this.drawing(x,y,width,height));
+    public void draw(Group root,double x, double y, int width, int height)    {
+        root.getChildren().add(this.drawing(width,height));
+        this.image.setLayoutX(x);
+        this.image.setLayoutY(y);
     }
 
 }
