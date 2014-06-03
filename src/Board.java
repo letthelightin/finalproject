@@ -274,8 +274,8 @@ public class Board extends Application {
     public int placesRight (int i, int j){
         int count = 0;
 
-            for (int x = i + 1; i < squarePlaces; x++) {
-                if (this.block(x, j).value() > 0) {
+            for (int x = i + 1; x < squarePlaces; x++) {
+                if (this.block(x, j).value() <= 0) {
                     count++;
                 }
             }

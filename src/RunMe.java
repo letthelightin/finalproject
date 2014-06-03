@@ -126,19 +126,16 @@ public class RunMe extends Application {
             for (int j=squarePlaces-1; j >= 0; j--){
                 for ( i=squarePlaces-1; i >= 0; i--){
 
-
                     int value = board.block(i,j).value();
                     if (value > 0) {
                         placesRight = board.placesRight(i, j);
 
                         if (placesRight > 0) {
-                            board.move(i, j, i+ placesRight, j).play();
+                            board.move(i, j, i + placesRight, j).play();
 
-                            board.swapPlaces(i, j, i+ placesRight,  j);
+                            board.swapPlaces(i, j, i + placesRight,  j);
                         }
                     }
-
-
 
 
                 }
