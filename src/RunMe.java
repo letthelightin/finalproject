@@ -77,95 +77,26 @@ public class RunMe extends Application {
 
 
         public void down() {
-            int placesBelow; int blocksBelow;
-            int j; //
 
-            for (int i = squarePlaces-1; i >= 0; i--) {
-                for (j = squarePlaces-1; j >= 0; j--) {
+            board.fallDown();
 
-                    int value = board.block(i,j).value();
-
-                    if (value > 0) {
-                        placesBelow = board.placesBelow(i, j);
-                        if (placesBelow > 0) {
-                            board.move(i, j, i, j + placesBelow).play();
-                            board.swapPlaces(i, j, i,  j + placesBelow);
-                        }
-                    }
-                }
-                j = squarePlaces-1;
-            }
         }
 
         public void up() {
-            int placesAbove;
-            int j;
 
-            for (int i = 0; i < this.squarePlaces; i++) {
-                for (j = 0; j < this.squarePlaces; j++) {
-                    int value = board.block(i,j).value();
-                    if (value > 0) {
-                        placesAbove = board.placesAbove(i, j);
+            board.fallUp();
 
-                        if (placesAbove > 0) {
-                            board.move(i, j, i, j - placesAbove).play();
-
-                            board.swapPlaces(i, j, i,  j - placesAbove);
-                        }
-                    }
-                }
-                j = 0;
-            }
         }
 
         public void right() {
-            int placesRight;
-            int i;
 
-            // pull items from the right to the right first
-            for (int j=squarePlaces-1; j >= 0; j--){
-                for ( i=squarePlaces-1; i >= 0; i--){
+            board.fallRight();
 
-                    int value = board.block(i,j).value();
-                    if (value > 0) {
-                        placesRight = board.placesRight(i, j);
-
-                        if (placesRight > 0) {
-                            board.move(i, j, i + placesRight, j).play();
-
-                            board.swapPlaces(i, j, i + placesRight,  j);
-                        }
-                    }
-
-
-                }
-                i=squarePlaces-1;
-            }
         }
 
         public void left() {
 
-            int placesLeft;
-            int i;
-
-            for (int j = 0; j < this.squarePlaces; j++) {
-                for (i = 0; i < this.squarePlaces; i++) {
-
-                    int value = board.block(i,j).value();
-                    if (value > 0) {
-                        placesLeft = board.placesLeft(i, j);
-
-                        if (placesLeft > 0) {
-                            board.move(i, j, i - placesLeft, j).play();
-
-                            board.swapPlaces(i, j, i - placesLeft,  j);
-                        }
-                    }
-
-                }
-                i = 0;
-            }
-
+            board.fallLeft();
 
         }
     }

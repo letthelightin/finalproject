@@ -212,7 +212,7 @@ public class Board extends Application {
         bY = (int) this.placeOriginY(bY);
 
         Path path = new Path();
-        this.root.getChildren().add(path); // comment this line to hide path from stage
+        // this.root.getChildren().add(path); // comment this line to hide path from stage
 
         MoveTo moveTo = new MoveTo();
         moveTo.setX(aX);
@@ -225,7 +225,7 @@ public class Board extends Application {
         path.getElements().add(moveTo);
         path.getElements().add(lineTo);
 
-        PathTransition pathTransition = new PathTransition(Duration.millis(700), path, image);
+        PathTransition pathTransition = new PathTransition(Duration.millis(100), path, image);
 
         return  pathTransition;
     }
@@ -306,6 +306,100 @@ public class Board extends Application {
         this.board[bX][bY] = space;
 
     }
+
+    public void fallDown() {
+        int placesBelow; int blocksBelow;
+        int j; //
+
+        for (int i = squarePlaces-1; i >= 0; i--) {
+            for (j = squarePlaces-1; j >= 0; j--) {
+                int value = this.block(i,j).value();
+
+                if (value > 0) {
+                    placesBelow = this.placesBelow(i, j);
+
+                    if (placesBelow > 0) {
+                        this.move(i, j, i, j + placesBelow).play();
+                        this.swapPlaces(i, j, i,  j + placesBelow);
+                    }
+                }
+            }
+            j = squarePlaces-1;
+        }
+    }
+
+    public void fallUp() {
+        int placesAbove;
+        int j;
+
+        for (int i = 0; i < this.squarePlaces; i++) {
+            for (j = 0; j < this.squarePlaces; j++) {
+                int value = this.block(i,j).value();
+
+                if (value > 0) {
+                    placesAbove = this.placesAbove(i, j);
+
+                    if (placesAbove > 0) {
+                        this.move(i, j, i, j - placesAbove).play();
+
+                        this.swapPlaces(i, j, i,  j - placesAbove);
+                    }
+                }
+            }
+            j = 0;
+        }
+    }
+
+    public void fallRight() {
+        int placesRight;
+        int i;
+
+        for (int j=squarePlaces-1; j >= 0; j--){
+            for ( i=squarePlaces-1; i >= 0; i--){
+                int value = this.block(i,j).value();
+
+                if (value > 0) {
+                    placesRight = this.placesRight(i, j);
+
+                    if (placesRight > 0) {
+                        this.move(i, j, i + placesRight, j).play();
+
+                        this.swapPlaces(i, j, i + placesRight,  j);
+                    }
+                }
+            }
+            i=squarePlaces-1;
+        }
+    }
+
+    public void fallLeft() {
+        int placesLeft;
+        int i;
+
+        for (int j = 0; j < this.squarePlaces; j++) {
+            for (i = 0; i < this.squarePlaces; i++) {
+                int value = this.block(i,j).value();
+
+                if (value > 0) {
+                    placesLeft = this.placesLeft(i, j);
+
+                    if (placesLeft > 0) {
+                        this.move(i, j, i - placesLeft, j).play();
+
+                        this.swapPlaces(i, j, i - placesLeft,  j);
+                    }
+                }
+            }
+            i = 0;
+        }
+    }
+
+
+
+
+
+
+
 
 
 
