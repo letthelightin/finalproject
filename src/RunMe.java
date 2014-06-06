@@ -13,6 +13,8 @@ import javafx.util.Duration;
 
 public class RunMe extends Application {
 
+    EventHandler<KeyEvent> kEvent;
+
     public static void main(String args[]) {
         launch(args);
     }
@@ -39,7 +41,7 @@ public class RunMe extends Application {
 
         board.drawBlocks();
 
-        EventHandler<KeyEvent> kEvent = new MyKeyEventHandler(board);
+        kEvent = new MyKeyEventHandler(board);
 
         board.scene().setOnKeyPressed(kEvent);
 
@@ -80,6 +82,15 @@ public class RunMe extends Application {
 
             board.fallDown();
 
+//            board.root().getChildren().remove(board.image());
+//
+//            board.root(new Group());
+//            board.scene(new Scene(board.root(),board.squarePixels(),board.squarePixels(), Color.WHITE));
+//            board.drawBackground();
+//            board.drawBlocks();
+//            board.primaryStage().setScene(board.scene());
+//            board.scene().setOnKeyPressed(kEvent);
+//            kEvent = new MyKeyEventHandler(board);
         }
 
         public void up() {

@@ -48,25 +48,22 @@ public class Board extends Application {
     }
 
     public void start(Stage primaryStage) throws Exception {
-
         //////
-        // This is the code that draws the Board class example
+        // This is the code that renders the Board class example
 
         Board board = new Board(primaryStage,4,400); // creates a new Board
 
         board.drawBackground();
 
-        //board.randomPlace().value(2);
-        //board.block(3,2).value(2);
-        board.block(0,0).value(2);
+        Block block = board.randomPlace();
+
+        block.value(2);
+
         board.drawBlocks();
 
-        //board.move(3,2,3,3);
-        board.move(0,0,0,3).play();
-
-        //////
         primaryStage.setScene(board.scene());
         primaryStage.show();
+        //////
     }
 
     public Board(){;};
@@ -244,8 +241,6 @@ public class Board extends Application {
 
     public void root(Group root){ this.root = root; }
 
-
-
     public Stage primaryStage() { return this.primaryStage; }
 
     public int placesBelow (int i, int j){
@@ -263,9 +258,7 @@ public class Board extends Application {
         int count = j;
 
         for (int y = count-1; y >= 0; y--){
-
             if (this.block(i,y).value() > 0) { count--; }
-
         }
 
         return count;
@@ -274,12 +267,11 @@ public class Board extends Application {
     public int placesRight (int i, int j){
         int count = 0;
 
-            for (int x = i + 1; x < squarePlaces; x++) {
-                if (this.block(x, j).value() <= 0) {
-                    count++;
-                }
+        for (int x = i + 1; x < squarePlaces; x++) {
+            if (this.block(x, j).value() <= 0) {
+                count++;
             }
-
+        }
 
         return count;
     }
@@ -292,7 +284,6 @@ public class Board extends Application {
                 count++;
             }
         }
-
 
         return count;
     }
@@ -309,17 +300,21 @@ public class Board extends Application {
 
     public void fallDown() {
         int placesBelow; int blocksBelow;
-        int j; //
+        int j;
+        PathTransition move;
 
         for (int i = squarePlaces-1; i >= 0; i--) {
             for (j = squarePlaces-1; j >= 0; j--) {
-                int value = this.block(i,j).value();
+                int value = this.block(i, j).value();
 
                 if (value > 0) {
                     placesBelow = this.placesBelow(i, j);
 
                     if (placesBelow > 0) {
-                        this.move(i, j, i, j + placesBelow).play();
+                        move = this.move(i, j, i, j + placesBelow);
+                        move.play();
+                        this.root.getChildren().remove(move);
+
                         this.swapPlaces(i, j, i,  j + placesBelow);
                     }
                 }
@@ -329,20 +324,23 @@ public class Board extends Application {
     }
 
     public void fallUp() {
+        PathTransition move;
         int placesAbove;
         int j;
 
         for (int i = 0; i < this.squarePlaces; i++) {
             for (j = 0; j < this.squarePlaces; j++) {
-                int value = this.block(i,j).value();
+                int value = this.block(i, j).value();
 
                 if (value > 0) {
                     placesAbove = this.placesAbove(i, j);
 
                     if (placesAbove > 0) {
-                        this.move(i, j, i, j - placesAbove).play();
+                        move = this.move(i, j, i, j - placesAbove);
+                        move.play();
+                        this.root.getChildren().remove(move);
 
-                        this.swapPlaces(i, j, i,  j - placesAbove);
+                        this.swapPlaces(i, j, i, j - placesAbove);
                     }
                 }
             }
@@ -351,20 +349,22 @@ public class Board extends Application {
     }
 
     public void fallRight() {
+        PathTransition move;
         int placesRight;
         int i;
 
         for (int j=squarePlaces-1; j >= 0; j--){
             for ( i=squarePlaces-1; i >= 0; i--){
-                int value = this.block(i,j).value();
+                int value = this.block(i, j).value();
 
                 if (value > 0) {
                     placesRight = this.placesRight(i, j);
 
                     if (placesRight > 0) {
-                        this.move(i, j, i + placesRight, j).play();
-
-                        this.swapPlaces(i, j, i + placesRight,  j);
+                        move = this.move(i, j, i + placesRight, j);
+                        move.play();
+                        this.root.getChildren().remove(move);
+                        this.swapPlaces(i, j, i + placesRight, j);
                     }
                 }
             }
@@ -373,20 +373,22 @@ public class Board extends Application {
     }
 
     public void fallLeft() {
+        PathTransition move;
         int placesLeft;
         int i;
 
         for (int j = 0; j < this.squarePlaces; j++) {
             for (i = 0; i < this.squarePlaces; i++) {
-                int value = this.block(i,j).value();
+                int value = this.block(i, j).value();
 
                 if (value > 0) {
                     placesLeft = this.placesLeft(i, j);
 
                     if (placesLeft > 0) {
-                        this.move(i, j, i - placesLeft, j).play();
-
-                        this.swapPlaces(i, j, i - placesLeft,  j);
+                        move = this.move(i, j, i - placesLeft, j);
+                        move.play();
+                        this.root.getChildren().remove(move);
+                        this.swapPlaces(i, j, i - placesLeft, j);
                     }
                 }
             }
@@ -394,9 +396,9 @@ public class Board extends Application {
         }
     }
 
+    public Group image() { return this.image; }
 
-
-
+    public void primaryStage(Stage primaryStage) { this.primaryStage = primaryStage; }
 
 
 

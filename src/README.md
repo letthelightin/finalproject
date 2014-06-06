@@ -15,7 +15,7 @@ http://gabrielecirulli.github.io/2048/
 
 ###Summary
 2048 is a game involving blocks with numeric values of 2 to the nth 
-power (1,2,4,8,... 2048... etc).
+power (1,2,4,8,... 2048... etc) moving in unison around the board.
 
 ###Initial State  
 The game starts with one or two blocks randomly placed.
@@ -35,11 +35,25 @@ not need to end after the game is won, but an announcement is expected
 when the 2048 tile is achieved.
 
 ###Information of J2048
-The project is intended to be easily understood and traced; much effort 
-has been placed into simplifying the names of the methods.
-
-The methods have mostly been left in order of use (and creation) as that
-is how I best remember their locations.
+The methods/constructors of Board have mostly been left in order of use (and creation) as that
+is how I best remember their locations - via their execution flow.
 
 The game is played by running the class RunMe. The other classes, Board 
 and Block, may be run to provide illustrative examples of themselves.
+
+A Block is a rectangle and centered label with an integer value displayed
+via the label and is capable of displaying itself via JavaFX
+
+A Board is fundamentally a square 2D array capable of displaying itself 
+via JavaFX. This board is four places wide by four places high and 
+is displayed at 400 pixels wide by 400 pixels high.
+
+At the start of the game the Board's block array is filled with empty Blocks
+and the background of the Board is drawn. A randomly selected place has its 
+Block's value set to 2. The Board then draws all Blocks with a value greater 
+than 0.
+
+Class RunMe's key handling works the rest: when a directional key on the 
+kayboard is pressed the handler traverses the Board's array creating, 
+executing, and  disposing of pathTransitions for each Block that should be
+ moved.
