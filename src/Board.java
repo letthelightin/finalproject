@@ -60,6 +60,7 @@ public class Board extends Application {
         board.drawBlocks();
 
         primaryStage.setScene(board.scene());
+
         primaryStage.show();
     }
 

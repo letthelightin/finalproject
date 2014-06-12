@@ -30,22 +30,19 @@ public class Block extends Application {
     }
 
     public void start(Stage primaryStage) throws Exception {
-
+        // This code draws the Block class example
         primaryStage.setTitle("Example of " + getClass().getSimpleName());
 
         Group root = new Group();
 
         Scene scene = new Scene(root, 400, 400, Color.WHITE);
 
-// This code draws the Block class example
-
         Block block = new Block();
 
         block.draw(root, 50, 50, 300, 300);
 
-        //////
-
         primaryStage.setScene(scene);
+
         primaryStage.show();
     }
 
