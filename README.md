@@ -1,11 +1,10 @@
-#Final Project: J2048
+#MPC: CSIS10a: Final Project: J2048
 ###https://github.com/letthelightin/finalproject/
-###created by Daniel Retta of the Monterey Peninsula College Fall 2014
+###created by Daniel Retta of Monterey Peninsula College Fall 2014
 
 ##Project Outline:
-
 This is a remake of the computer game 2048 for a Java class hosted by
-Monterey Peninsula College of Monterey, California, USA and taught by
+Monterey Peninsula College of Monterey, California, USA taught by
 Brian Schlining.
 
 An example of the game can be found at:
@@ -15,12 +14,14 @@ http://gabrielecirulli.github.io/2048/
 
 ###Summary
 2048 is a game involving blocks with numeric values of 2 to the nth 
-power (1,2,4,8,... 2048... etc) moving in unison around the board.
+power (1,2,4,8,... 2048... etc) moving in unison around a board, 
+combining when two blocks of the same value are pushed together.
 
 ###Initial State  
-The game starts with one or two blocks randomly placed.
+The game starts with one or two blocks of the lowest or second
+lowest value(s) randomly placed.
 
-###Process       
+###Process
 A process consists of the user pushing an arrow key on their keyboard,
 and all of the blocks moving in the direction as far as space allows.
 If two blocks of the same value are pushed together, they combine to 
@@ -35,8 +36,9 @@ not need to end after the game is won, but an announcement is expected
 when the 2048 tile is achieved.
 
 ###Information of J2048
-The methods/constructors of Board have mostly been left in order of use (and creation) as that
-is how I best remember their locations - via their execution flow.
+The methods/constructors of Board have mostly been left in order of use 
+(and creation) as that is how I best remember their locations - via their 
+execution flow.
 
 The game is played by running the class RunMe. The other classes, Board 
 and Block, may be run to provide illustrative examples of themselves.
@@ -54,6 +56,6 @@ Block's value set to 2. The Board then draws all Blocks with a value greater
 than 0.
 
 Class RunMe's key handling works the rest: when a directional key on the 
-kayboard is pressed the handler traverses the Board's array creating, 
-executing, and  disposing of pathTransitions for each Block that should be
- moved.
+keyboard is pressed the handler traverses the Board's array creating, 
+executing, and  disposing of pathTransitions for each Block that should be 
+moved.

@@ -24,19 +24,14 @@ public class RunMe extends Application {
         int squarePixels = 400;
         int squarePlaces = 4;
 
-        //////
-        // This is the code that draws the Board class example
-
         Board board = new Board(primaryStage, squarePlaces, squarePixels); // creates a new Board
 
         board.drawBackground();
 
-        //board.randomPlace().value(2);
-
         board.block(0,0).value(2);
         board.block(0,1).value(2);
         board.block(2,2).value(2);
-        board.block(3,3).value(2);
+
         board.block(3,2).value(2);
 
         board.drawBlocks();
@@ -45,11 +40,9 @@ public class RunMe extends Application {
 
         board.scene().setOnKeyPressed(kEvent);
 
-        //////
         primaryStage.setScene(board.scene());
         primaryStage.show();
     }
-
 
     class MyKeyEventHandler implements EventHandler<KeyEvent> {
 
@@ -65,50 +58,36 @@ public class RunMe extends Application {
             root = board.root();
         }
 
-        public void handle(final KeyEvent keyEvent) {
-            if (keyEvent.getCode() == KeyCode.DOWN) {
-                down();
-            } else if (keyEvent.getCode() == KeyCode.UP) {
-                up();
-            } else if (keyEvent.getCode() == KeyCode.RIGHT) {
-                right();
-            } else if (keyEvent.getCode() == KeyCode.LEFT) {
-                left();
-            }
+        public void handle(final KeyEvent kE) {
+            if (kE.getCode() == KeyCode.DOWN || kE.getCode() == KeyCode.S) { down();
+            } else if (kE.getCode() == KeyCode.UP || kE.getCode() == KeyCode.W) { up();
+            } else if (kE.getCode() == KeyCode.RIGHT || kE.getCode() == KeyCode.D) { right();
+            } else if (kE.getCode() == KeyCode.LEFT || kE.getCode() == KeyCode.A) { left();
+            } else if (kE.getCode() == KeyCode.ESCAPE) { escape(); }
         }
 
-
         public void down() {
-
             board.fallDown();
-
-//            board.root().getChildren().remove(board.image());
-//
-//            board.root(new Group());
-//            board.scene(new Scene(board.root(),board.squarePixels(),board.squarePixels(), Color.WHITE));
-//            board.drawBackground();
-//            board.drawBlocks();
-//            board.primaryStage().setScene(board.scene());
-//            board.scene().setOnKeyPressed(kEvent);
-//            kEvent = new MyKeyEventHandler(board);
+            //board.randomPlace().value(2);
         }
 
         public void up() {
-
             board.fallUp();
 
         }
 
         public void right() {
-
             board.fallRight();
-
+            //board.randomPlace().value(2);
         }
 
         public void left() {
-
             board.fallLeft();
+            //board.randomPlace().value(2);
+        }
 
+        public void escape() {
+            board.primaryStage().close();
         }
     }
 

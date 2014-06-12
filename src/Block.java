@@ -37,11 +37,7 @@ public class Block extends Application {
 
         Scene scene = new Scene(root, 400, 400, Color.WHITE);
 
-        //////
-        // This is the code that draws the Block class example
-        // by adding a drawing of Block with (x, y, width, height)
-        // to the Group root submitted to Scene scene and displayed
-        // by the special instance primaryStage.
+// This code draws the Block class example
 
         Block block = new Block();
 
