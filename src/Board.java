@@ -49,18 +49,20 @@ public class Board extends Application {
 
     public void start(Stage primaryStage) throws Exception {
         // This code draws the Board class example
-        Board board = new Board(primaryStage,4,600);
+        int squarePixels = 680;
+        int squarePlaces = 5;
+
+        Board board = new Board(primaryStage, squarePlaces, squarePixels); // creates a new Board
 
         board.drawBackground();
 
-        Block block = board.randomPlace();
+        for (int i=0; i < squarePlaces ;i++) { board.addBlock(i,i,2); }
 
-        block.value(2);
+        board.addBlock(randomInt(squarePlaces),randomInt(squarePlaces),2);
 
         board.drawBlocks();
 
         primaryStage.setScene(board.scene());
-
         primaryStage.show();
     }
 
@@ -88,9 +90,11 @@ public class Board extends Application {
 
     }
 
-    public void addBlock(int x, int y, int value) { board[x][y]= new Block(value); }
+    public void addBlock(int x, int y, int value) {
+        board[x][y] = new Block(value);
+    }
 
-    //provides a single integer address for each block
+    //provides a single integer address for each place on the board
     public Block block(int b) {
 
         int x = b / squarePlaces();
@@ -105,6 +109,7 @@ public class Board extends Application {
 
     public Scene scene(){ return scene; }
 
+    //draws a grid of places
     public Pane background(){
         Pane background = new Pane();
 
@@ -143,11 +148,35 @@ public class Board extends Application {
     public void drawBackground() {
         root.getChildren().add(background());
     }
-    public Block randomPlace() {
-        int x = (int) (Math.random()*(double)squarePlaces);
-        int y = (int) (Math.random()*(double)squarePlaces);
+
+    public Block randomBlock() {
+
+        int x = (int) (Math.random() * (double) squarePlaces);
+        int y = (int) (Math.random() * (double) squarePlaces);
+
+        int count = 0;
+
+        while ((board[x][y]==null || board[x][y].value()>0) && count<100) {
+            x = (int) (Math.random() * (double) squarePlaces);
+            y = (int) (Math.random() * (double) squarePlaces);
+        }
 
         return board[x][y];
+    }
+
+    public int randomInt(int squarePlaces) {
+
+        int x = (int) (Math.random() * (double) squarePlaces);
+
+        return x;
+    }
+
+    //VERY STRANGE;RANDOM DOES NOT WORK IN THIS FUNCTION BUT DOES FOR ONE ABOVE
+    public int randomInt() {
+
+        int x = (int) (Math.random() * (double) squarePlaces);
+
+        return x;
     }
 
     public Group blocks() {
@@ -162,28 +191,28 @@ public class Board extends Application {
         int j = 0;
         for (int i = 0; i < squarePlaces; i++) {
             for (j = 0; j < squarePlaces; j++) {
+                if (board[i][j]!=null) {
+                    //provide the width and height of a place rectangle
+                    width = squarePixels / squarePlaces - spacer * 2;
+                    height = squarePixels / squarePlaces - spacer * 2;
 
-                //provide the width and height of a place rectangle
-                width = squarePixels/squarePlaces - spacer * 2;
-                height = squarePixels/squarePlaces - spacer * 2;
+                    // provide an x and y coordinate for our pixel grid
+                    x = i * squarePixels / squarePlaces + spacer;
+                    y = j * squarePixels / squarePlaces + spacer;
 
-                // provide an x and y coordinate for our pixel grid
-                x = i * squarePixels/squarePlaces + spacer;
-                y = j * squarePixels/squarePlaces + spacer;
+                    blockDrawing = board[i][j].drawing(width, height);
 
-                blockDrawing = board[i][j].drawing(width,height);
+                    blockDrawing.setTranslateX(x);
+                    blockDrawing.setTranslateY(y);
 
-                blockDrawing.setTranslateX(x);
-                blockDrawing.setTranslateY(y);
+                    if (board[i][j].value() <= minValue) {
+                        blockDrawing.setVisible(false);
+                    }
 
-                if (board[i][j].value() <= minValue) {
-                    blockDrawing.setVisible(false);
+                    board[i][j].image(blockDrawing);
+
+                    image.getChildren().add(blockDrawing);
                 }
-
-                board[i][j].image(blockDrawing);
-
-                image.getChildren().add(blockDrawing);
-
             }
             j = 0;
         }
@@ -226,12 +255,12 @@ public class Board extends Application {
     }
 
     public double placeOriginX (int a) {
-        double squarePlacePixel = squarePixels/squarePlaces;
+        double squarePlacePixel = (double) squarePixels/ (double)squarePlaces;
         return a * squarePlacePixel + (0.5 * squarePlacePixel) ;
     }
 
     public double placeOriginY (int a) {
-        double squarePlacePixel = squarePixels/squarePlaces;
+        double squarePlacePixel = (double)squarePixels/(double)squarePlaces;
         return a * squarePlacePixel + (0.5 * squarePlacePixel) ;
     }
 
@@ -245,7 +274,7 @@ public class Board extends Application {
         int count = squarePlaces-1-j;
 
         for (int y = j + 1; y < squarePlaces(); y++){
-            if (board[i][y].value() > 0) { count--; }
+            if (board[i][y]!=null && board[i][y].value() > 0) { count--; }
         }
 
         return count;
@@ -255,7 +284,7 @@ public class Board extends Application {
         int count = j;
 
         for (int y = count-1; y >= 0; y--){
-            if (board[i][y].value() > 0) { count--; }
+            if (board[i][y]!=null && board[i][y].value() > 0) { count--; }
         }
 
         return count;
@@ -265,7 +294,7 @@ public class Board extends Application {
         int count = 0;
 
         for (int x = i + 1; x < squarePlaces; x++) {
-            if (board[x][j].value() <= 0) {
+            if (board[x][j]==null || board[x][j].value() <= 0) {
                 count++;
             }
         }
@@ -277,7 +306,7 @@ public class Board extends Application {
         int count = 0;
 
         for (int x = i - 1; x >= 0 ; x--) {
-            if (board[x][j].value() <= 0) {
+            if (board[x][j]==null || board[x][j].value() <= 0) {
                 count++;
             }
         }
@@ -287,11 +316,14 @@ public class Board extends Application {
 
     public void swapPlaces(int aX, int aY, int bX, int bY) {
 
-        Block space = new Block();
+        Block temp = new Block();
 
-        space = board[aX][aY];
-        board[aX][aY] = board[bX][bY];
-        board[bX][bY] = space;
+        if (board[aX][aY]!=null) {
+            temp = board[aX][aY];
+            board[aX][aY] = board[bX][bY];
+            board[bX][bY] = temp;
+        }
+
     }
 
     public void fallDown() {
@@ -301,17 +333,19 @@ public class Board extends Application {
 
         for (int i = squarePlaces-1; i >= 0; i--) {
             for (j = squarePlaces-1; j >= 0; j--) {
-                int value = board[i][j].value();
+                if (board[i][j]!=null) {
+                    int value = board[i][j].value();
 
-                if (value > 0) {
-                    placesBelow = placesBelow(i, j);
+                    if (value > 0) {
+                        placesBelow = placesBelow(i, j);
 
-                    if (placesBelow > 0) {
-                        move = move(i, j, i, j + placesBelow);
-                        move.play();
-                        //root.getChildren().remove(move);
+                        if (placesBelow > 0) {
+                            move = move(i, j, i, j + placesBelow);
+                            move.play();
+                            //root.getChildren().remove(move);
 
-                        swapPlaces(i, j, i,  j + placesBelow);
+                            swapPlaces(i, j, i, j + placesBelow);
+                        }
                     }
                 }
             }
@@ -326,16 +360,18 @@ public class Board extends Application {
 
         for (int i = 0; i < squarePlaces; i++) {
             for (j = 0; j < squarePlaces; j++) {
-                int value = board[i][j].value();
+                if (board[i][j]!=null) {
+                    int value = board[i][j].value();
 
-                if (value > 0) {
-                    placesAbove = placesAbove(i, j);
+                    if (value > 0) {
+                        placesAbove = placesAbove(i, j);
 
-                    if (placesAbove > 0) {
-                        move = move(i, j, i, j - placesAbove);
-                        move.play();
+                        if (placesAbove > 0) {
+                            move = move(i, j, i, j - placesAbove);
+                            move.play();
 
-                        swapPlaces(i, j, i, j - placesAbove);
+                            swapPlaces(i, j, i, j - placesAbove);
+                        }
                     }
                 }
             }
@@ -350,15 +386,17 @@ public class Board extends Application {
 
         for (int j=squarePlaces-1; j >= 0; j--){
             for ( i=squarePlaces-1; i >= 0; i--){
-                int value = board[i][j].value();
+                if (board[i][j]!=null) {
+                    int value = board[i][j].value();
 
-                if (value > 0) {
-                    placesRight = placesRight(i, j);
+                    if (value > 0) {
+                        placesRight = placesRight(i, j);
 
-                    if (placesRight > 0) {
-                        move = move(i, j, i + placesRight, j);
-                        move.play();
-                        swapPlaces(i, j, i + placesRight, j);
+                        if (placesRight > 0) {
+                            move = move(i, j, i + placesRight, j);
+                            move.play();
+                            swapPlaces(i, j, i + placesRight, j);
+                        }
                     }
                 }
             }

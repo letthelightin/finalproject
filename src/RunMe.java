@@ -21,17 +21,14 @@ public class RunMe extends Application {
 
     public void start(Stage primaryStage) throws Exception {
 
-        int squarePixels = 680;
-        int squarePlaces = 5;
+        int squarePixels = 600;
+        int squarePlaces = 6;
 
         Board board = new Board(primaryStage, squarePlaces, squarePixels); // creates a new Board
 
         board.drawBackground();
 
-        board.addBlock(0,0,2);
-        board.addBlock(0,1,2);
-        board.addBlock(2,2,2);
-        board.addBlock(3,2,2);
+        for (int i=0; i < squarePlaces ;i++) { board.addBlock(randomInt(squarePlaces),randomInt(squarePlaces),2); }
 
         board.drawBlocks();
 
@@ -58,11 +55,17 @@ public class RunMe extends Application {
         }
 
         public void handle(final KeyEvent kE) {
-            if (kE.getCode() == KeyCode.DOWN || kE.getCode() == KeyCode.S) { down();
-            } else if (kE.getCode() == KeyCode.UP || kE.getCode() == KeyCode.W) { up();
-            } else if (kE.getCode() == KeyCode.RIGHT || kE.getCode() == KeyCode.D) { right();
-            } else if (kE.getCode() == KeyCode.LEFT || kE.getCode() == KeyCode.A) { left();
-            } else if (kE.getCode() == KeyCode.ESCAPE) { escape(); }
+            if (kE.getCode() == KeyCode.DOWN || kE.getCode() == KeyCode.S) {
+                down();
+            } else if (kE.getCode() == KeyCode.UP || kE.getCode() == KeyCode.W) {
+                up();
+            } else if (kE.getCode() == KeyCode.RIGHT || kE.getCode() == KeyCode.D) {
+                right();
+            } else if (kE.getCode() == KeyCode.LEFT || kE.getCode() == KeyCode.A) {
+                left();
+            } else if (kE.getCode() == KeyCode.ESCAPE) {
+                escape();
+            }
         }
 
         public void down() {
@@ -90,6 +93,12 @@ public class RunMe extends Application {
         }
     }
 
-}
-    
 
+    public int randomInt(int squarePlaces) {
+
+        int x = (int) (Math.random() * (double) squarePlaces);
+
+        return x;
+    }
+
+}
