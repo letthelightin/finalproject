@@ -88,9 +88,7 @@ public class Board extends Application {
 
     }
 
-    public void addBlock(int x, int y, int value) {
-        board[x][y]= new Block(value);
-    }
+    public void addBlock(int x, int y, int value) { board[x][y]= new Block(value); }
 
     //provides a single integer address for each block
     public Block block(int b) {
@@ -101,9 +99,9 @@ public class Board extends Application {
         return board[x][y];
     }
 
-    public int squarePlaces(){return squarePlaces;}
+    public int squarePlaces(){ return squarePlaces; }
 
-    public int squarePixels(){return squarePixels;}
+    public int squarePixels(){ return squarePixels; }
 
     public Scene scene(){ return scene; }
 
@@ -115,7 +113,7 @@ public class Board extends Application {
 
         spacer = 8;
 
-        for (int i = 0; i < Math.pow(squarePlaces,2); i++) {
+        for (int i=0; i<Math.pow(squarePlaces,2) ;i++) {
 
             // provide an identifying x and y coordinate for our board grid
             x = i / squarePlaces;
