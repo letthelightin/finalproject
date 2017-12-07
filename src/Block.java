@@ -13,6 +13,9 @@ public class Block extends Application {
 
     private int value;      // value of the block
 
+    private int x;
+    private int y;
+
     private double strokeWidth;     // strength of the stroke
 
     private Rectangle rectangle;
@@ -24,22 +27,22 @@ public class Block extends Application {
     private Group image;            // group of javafx components
 
     public static void main(String args[]) {
-        // This class may be run to provide an example
-        // of a single block being drawn.
+        //This class may be run to provide an example
+        //of a single block being drawn.
         launch(args);
     }
 
     public void start(Stage primaryStage) throws Exception {
-        // This code draws the Block class example
+        // This code draws the Class Block Example
         primaryStage.setTitle("Example of " + getClass().getSimpleName());
 
         Group root = new Group();
 
-        Scene scene = new Scene(root, 400, 400, Color.WHITE);
+        Scene scene = new Scene(root, 600, 600, Color.WHITE);
 
         Block block = new Block();
 
-        block.draw(root, 50, 50, 300, 300);
+        block.draw(root, 50, 50, 500, 500);
 
         primaryStage.setScene(scene);
 
@@ -47,19 +50,19 @@ public class Block extends Application {
     }
 
     public Block() {
-        this.value = 0;
-        this.strokeWidth = 0;
-        this.block = Color.WHITE;
-        this.stroke = Color.BLACK;
-        this.label = Color.BLACK;
+        value = 0;
+        strokeWidth = 0;
+        block = Color.WHITE;
+        stroke = Color.BLACK;
+        label = Color.BLACK;
     }
 
     public Block(int value) {
-        this.value = 0;
-        this.strokeWidth = 3;
-        this.block = Color.BLACK;
-        this.stroke = Color.BLACK;
-        this.label = Color.WHITE;
+        value = 0;
+        strokeWidth = 2;
+        block = Color.BLACK;
+        stroke = Color.BLACK;
+        label = Color.WHITE;
     }
 
     // SET Constructors for private variables of this Block
@@ -123,8 +126,8 @@ public class Block extends Application {
         this.image.getChildren().add(rectangle);
 
         Label label = new Label("" + this.value);
-        label.setLayoutX(40 * width / 100);
-        label.setLayoutY(30 * height / 100);
+        label.setLayoutX(38 * width / 100);
+        label.setLayoutY(22 * height / 100);
         label.setFont(Font.font("Calibri", 50 * width / 100));
         label.setTextFill(this.label);
 
@@ -140,4 +143,5 @@ public class Block extends Application {
     }
 
     public void image(Group image){this.image = image; }
+
 }
