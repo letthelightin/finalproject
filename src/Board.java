@@ -49,7 +49,7 @@ public class Board extends Application {
 
     public void start(Stage primaryStage) throws Exception {
         // This code draws the Board class example
-        int squarePixels = 680;
+        int squarePixels = 600;
         int squarePlaces = 5;
 
         Board board = new Board(primaryStage, squarePlaces, squarePixels); // creates a new Board
@@ -318,7 +318,7 @@ public class Board extends Application {
 
         Block temp = new Block();
 
-        if (board[aX][aY]!=null) {
+        if (board[aX][aY]!=null && board[bX][bY]!=null) {
             temp = board[aX][aY];
             board[aX][aY] = board[bX][bY];
             board[bX][bY] = temp;
