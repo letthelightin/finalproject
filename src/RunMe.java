@@ -69,13 +69,13 @@ public class RunMe extends Application {
         }
 
         public void down() {
+            board.mergeDown(board.image()); // merges blocks in the array
             board.fallDown();
             //board.randomPlace().value(2);
         }
 
         public void up() {
             board.fallUp();
-
         }
 
         public void right() {
