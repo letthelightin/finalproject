@@ -11,10 +11,9 @@ import javafx.stage.Stage;
 
 public class Block extends Application {
 
-    private int value;      // value of the block
+    private int value;              // value of the block
 
-    private int x;
-    private int y;
+    private int x, y;
 
     private double strokeWidth;     // strength of the stroke
 
@@ -27,8 +26,8 @@ public class Block extends Application {
     private Group image;            // group of javafx components
 
     public static void main(String args[]) {
-        //This class may be run to provide an example
-        //of a single block being drawn.
+        // This class may be run to provide an example
+        // of a single block being drawn.
         launch(args);
     }
 
@@ -58,7 +57,7 @@ public class Block extends Application {
     }
 
     public Block(int value) {
-        value = 0;
+        this.value = value;
         strokeWidth = 2;
         block = Color.BLACK;
         stroke = Color.BLACK;
@@ -75,73 +74,62 @@ public class Block extends Application {
     }
 
     public void block(Color color) {
-        this.block = color;
+        block = color;
     }
 
     public void stroke(Color color) {
-        this.stroke = color;
+        stroke = color;
     }
 
     public void label(Color color) {
-        this.label = color;
+        label = color;
     }
 
-    // GET Constructors for private variables of this Block
-    public int value() {
-        return this.value;
-    }
+    public int value() { return value; }
 
-    public double strokeWidth() {
-        return this.strokeWidth;
-    }
+    public double strokeWidth() { return strokeWidth; }
 
-    public Color block() {
-        return this.block;
-    }
+    public Color block() { return block; }
 
-    public Color stroke() {
-        return this.stroke;
-    }
+    public Color stroke() { return stroke; }
 
-    public Color label() {
-        return this.label;
-    }
+    public Color label() { return label; }
 
-    public Group image() {
-        return this.image;
-    }
+    public Group image() { return image; }
 
+
+    // controls block characteristics
     public Group drawing(int width, int height) {
 
-        this.image = new Group();
+        image = new Group();
 
-        this.rectangle = new Rectangle(width, height);
-        this.rectangle.setSmooth(true);
-        this.rectangle.setArcHeight(30 * width / 100);
-        this.rectangle.setArcWidth(30 * width / 100);
-        this.rectangle.setStroke(this.stroke);
-        this.rectangle.setFill(this.block);
-        this.rectangle.setStrokeWidth(3 * width / 100);
+        rectangle = new Rectangle(width, height);
+        rectangle.setSmooth(true);
+        rectangle.setArcHeight(35 * width / 100);
+        rectangle.setArcWidth(35 * width / 100);
+        rectangle.setStroke(stroke);
+        rectangle.setFill(block);
+        rectangle.setStrokeWidth(3 * width / 100);
 
-        this.image.getChildren().add(rectangle);
+        image.getChildren().add(rectangle);
 
-        Label label = new Label("" + this.value);
+        Label label = new Label("" + value);
         label.setLayoutX(38 * width / 100);
         label.setLayoutY(22 * height / 100);
         label.setFont(Font.font("Calibri", 50 * width / 100));
         label.setTextFill(this.label);
 
-        this.image.getChildren().add(label);
+        image.getChildren().add(label);
 
-        return this.image;
+        return image;
     }
 
     public void draw(Group root, double x, double y, int width, int height) {
-        root.getChildren().add(this.drawing(width, height));
-        this.image.setLayoutX(x);
-        this.image.setLayoutY(y);
+        root.getChildren().add(drawing(width, height));
+        image.setLayoutX(x);
+        image.setLayoutY(y);
     }
 
-    public void image(Group image){this.image = image; }
+    public void image(Group image){image = image; }
 
 }

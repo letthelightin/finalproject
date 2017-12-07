@@ -21,18 +21,17 @@ public class RunMe extends Application {
 
     public void start(Stage primaryStage) throws Exception {
 
-        int squarePixels = 400;
-        int squarePlaces = 4;
+        int squarePixels = 680;
+        int squarePlaces = 5;
 
         Board board = new Board(primaryStage, squarePlaces, squarePixels); // creates a new Board
 
         board.drawBackground();
 
-        board.block(0,0).value(2);
-        board.block(0,1).value(2);
-        board.block(2,2).value(2);
-
-        board.block(3,2).value(2);
+        board.addBlock(0,0,2);
+        board.addBlock(0,1,2);
+        board.addBlock(2,2,2);
+        board.addBlock(3,2,2);
 
         board.drawBlocks();
 
